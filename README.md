@@ -2,7 +2,7 @@
 
 This repository contains the official Matlab implementation for our paper submitted to RA-L and IROS 2021 with title "A Scalable Framework for Map Matching based Cooperative Localization"
 
-<img align="center" src="https://github.com/wvu-irl/Scalable-Framework-Cooperative-Localization/blob/docs/overall_approach_thick_borders.pdf">
+<img align="center" src="https://github.com/wvu-irl/Scalable-Framework-Cooperative-Localization/blob/main/docs/overall_approach_thick_borders.pdf">
 
 ## Overview
 - [News](#news)
