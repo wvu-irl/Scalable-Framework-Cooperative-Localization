@@ -2,7 +2,7 @@
 /*********************************************************************
 * Software License Agreement (BSD License)
 *
-* Copyright (c) <2018>, WVU Interactive Robotics Laboratory
+* Copyright (c) <2021>, WVU Interactive Robotics Laboratory
 *                       https://web.statler.wvu.edu/~irl/
 * All rights reserved.
 *
@@ -35,11 +35,12 @@
 *********************************************************************/
 %}
 %%
-%This function is used to perform parallel computing in Monte Carlo simulator
-%No need to change any parameters inside
+% This function is used to perform parallel computing in Monte Carlo simulator
+% No need to change any parameters inside this file
+
 function data = cooperative_magnetic_localization(mc)
 
-    simu.N=mc.N;    %number of UAVs
+    simu.N=mc.N;    %number of agents
     simu.subN=mc.subN;
     simu.fullCommunication=mc.fullCommunication;    %1: complete communication 0: pairwise communication
 
@@ -64,16 +65,11 @@ function data = cooperative_magnetic_localization(mc)
     simu.amplitude = mc.amplitude;     %amplitude of the speed (m/s) ps: base line for velocity is 50 m/s
     simu.initdistance = mc.initdistance;   %distance between each pair of neighbot UAVs' initial positions
 
-
     %For particle filter parameters
     simu.sigmaMagnetic=mc.sigmaMagnetic; %standard deviation of magnetic measurement error (nT)
     simu.magneticMap = mc.magneticMap;    %1: altitude 305 m; 2: 1205 m; 3: 2705 m; 4: 3005 m
     simu.npf = mc.npf; %number of particles in the particle filter
     simu.threshold_resample = mc.threshold_resample; %if the number of effective particles below threshold, do resample
-
-    %For gradient descent
-    simu.alpha = mc.alpha; %RMSProp
-    simu.iteration = mc.iteration; %number of iteration for doing gradient descent
 
     %For feedback control
     simu.kd = mc.kd; %gain for distance between UAV's position and target line
@@ -91,10 +87,7 @@ function data = cooperative_magnetic_localization(mc)
     elseif simu.fullCommunication == 1
         simu.delayN = 0;
     end
-
-    %Print Simulation Parameters
-%     simu
-    % tic
+    
     %Initialization
     run('init_generate_target_trajectory.m');
     run('init_grouping.m');
@@ -119,22 +112,9 @@ function data = cooperative_magnetic_localization(mc)
             %Update Simulation Variables
             simu.i = simu.i + 1;
             simu.accumulatedTime = simu.accumulatedTime + simu.Ts;
-
-            %Print Progress
-    %         if(mod(simu.i,250)==0)
-    %             progress=simu.accumulatedTime/(simu.simulationTime)
-    %         end
     end
     
     %Save Monte Carlo Iteration
-%     data.cl = cl;
-%     data.mn = mn;
-%     data.errors_cl = errors.cl;
-%     data.errors_dr_p = errors.dr.p;
-%     data.errors_mn_p = errors.mn.p;
-%     data.errors_dr_theta = errors.dr.theta;
-%     data.errors_mn_theta = errors.mn.theta;
-
     data.errors_dr = errors.dr;
     data.errors_mn = errors.mn;
     

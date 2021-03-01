@@ -2,7 +2,7 @@
 /*********************************************************************
 * Software License Agreement (BSD License)
 *
-* Copyright (c) <2018>, WVU Interactive Robotics Laboratory
+* Copyright (c) <2021>, WVU Interactive Robotics Laboratory
 *                       https://web.statler.wvu.edu/~irl/
 * All rights reserved.
 *
@@ -35,17 +35,17 @@
 *********************************************************************/
 %}
 %%
-%function [x,y,theta] = fn_propagate_global_pose(x,y,theta,vel,dtheta,dt)
-%to estimate dynamic movement based on velocity and yaw rate
-%output [x,y,theta]: pose at timestep k+1
-%input (x,y,theta): pose at timestep k
-%		vel: velocity
-%		dtheta: yaw rate
-%		dt: sampling time
-
-function [x,y,theta] = fn_propagate_global_pose(x,y,theta,vel,dtheta,dt)
-	x = x + dt*vel*cos(theta);
-	y = y + dt*vel*sin(theta);
-	theta = theta + dt*dtheta;
+%propagate pose in global reference frame
+for idx=1:simu.N 
+    [x,y,theta] = fn_propagate_global_pose(agent(idx).px(simu.i-1),...
+                                        agent(idx).py(simu.i-1),...
+                                        agent(idx).theta(simu.i-1),...
+                                        agent(idx).vel(simu.i),...
+                                        agent(idx).dtheta(simu.i),...
+                                        simu.Ts);
+    agent(idx).px(simu.i)=x;
+    agent(idx).py(simu.i)=y;
+    agent(idx).theta(simu.i)=theta;
 end
 
+clear idx x y theta

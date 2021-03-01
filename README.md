@@ -1,19 +1,9 @@
 # Scalable-Framework-Cooperative-Localization
 
-This repository contains the official Matlab implementation for our paper submitted to RA-L and IROS 2021 with title "A Scalable Framework for Map Matching based Cooperative Localization"
+This repository contains the official Matlab implementation for our paper submitted to RA-L and IROS 2021 with title "A Scalable Framework for Map Matching based Cooperative Localization".
 
 <img align="center" src="https://github.com/wvu-irl/Scalable-Framework-Cooperative-Localization/blob/main/docs/overall_approach.png">
-
-<center>
-    <img style="border-radius: 0.3125em;
-    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);"
-    src="https://github.com/wvu-irl/Scalable-Framework-Cooperative-Localization/blob/main/docs/overall_approach.png">
-    <br>
-    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
-    display: inline-block;
-    color: #999;
-    padding: 2px;">Illustration of the proposed framework for map matching based cooperative localization. (Left) A large group of agents is divided in subgroups based on communication constraints where one subgroup is created for each agent. (Upper Right) The geometry of the subgroups (i.e., the relative positions) are estimated using range-only measurements, then the geometry is used to extract measurements of the scalar field to estimate the pose and associated uncertainty. (Lower Right) An agent receives multiple copies of its pose estimate through its membership in several subgroups and fuses them to reduce pose error.</div>
-</center>
+Illustration of the proposed framework for map matching based cooperative localization. (Left) A large group of agents is divided in subgroups based on communication constraints where one subgroup is created for each agent. (Upper Right) The geometry of the subgroups (i.e., the relative positions) are estimated using range-only measurements, then the geometry is used to extract measurements of the scalar field to estimate the pose and associated uncertainty. (Lower Right) An agent receives multiple copies of its pose estimate through its membership in several subgroups and fuses them to reduce pose error.
 
 ## Overview
 - [News](#news)
@@ -31,18 +21,42 @@ Localization based on map matching (e.g., using gravity anomaly, magnetic anomal
 
 ### Pre-requirements
 This code was tested with MATLAB 2020b. The following toolboxs are required with the code:
--Parallel Computing Toolbox
--Control System Toolbox
 
-### Plot maps
-#### Bathymetric map
--download map data at: Google Drive(https://drive.google.com/file/d/14npOMaTV6z6uZIB4Uet7j0KISWl9a9CN/view?usp=sharing)
--copy the chancen_bath.asc file to the folder bathymetric_map/
--run plot_bathymetric_map.m under folder bathymetric_map/
+- Parallel Computing Toolbox
+- Control System Toolbox
 
-#### Magnetic anomaly map
--run plot_magnetic_map.m under folder magnetic_maps/
+### Simulation with Magnetic anomaly map
+#### Plot map
+- run plot_magnetic_map.m under folder magnetic_maps/
+
+#### Perform the proposed algorithm (Once)
+- set parameters in main.m under folder Proposed_algorithm_mag_map/
+- run main.m under folder Proposed_algorithm_mag_map/
+
+#### Perform the proposed algorithm (Monte Carlo Simulations)
+- set parameters in monte_carlo_parallel.m under folder Proposed_algorithm_mag_map/
+- run monte_carlo_parallel.m under folder Proposed_algorithm_mag_map/
+
+#### Perform the full connection case
+- set parameters in main.m under folder Full_connection_mag_map/
+- run main.m under folder Full_connection__mag_map/
+- set parameters in monte_carlo_parallel.m under folder Full_connection_mag_map/
+- run monte_carlo_parallel.m under folder Full_connection_mag_map/
+
+
+### Simulation with Bathymetric map
+#### Plot map
+- download map data at: [Google Drive link](https://drive.google.com/file/d/14npOMaTV6z6uZIB4Uet7j0KISWl9a9CN/view?usp=sharing)
+- copy the chancen_bath.asc file to the folder bathymetric_map/
+- run plot_bathymetric_map.m under folder bathymetric_map/
+
+#### Perform the proposed algorithm (Once)
+
+#### Perform the proposed algorithm (Monte Carlo Simulations)
+
+#### Perform the full connection case
+
 
 ## Acknowledgement
-Thanks for the scalar field map data provided by U.S. Geological Survey.
+Thanks for the scalar field map data provided by [U.S. Geological Survey](https://www.usgs.gov/).
 

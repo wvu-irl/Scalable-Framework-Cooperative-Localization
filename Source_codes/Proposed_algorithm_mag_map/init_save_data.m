@@ -2,7 +2,7 @@
 /*********************************************************************
 * Software License Agreement (BSD License)
 *
-* Copyright (c) <2018>, WVU Interactive Robotics Laboratory
+* Copyright (c) <2021>, WVU Interactive Robotics Laboratory
 *                       https://web.statler.wvu.edu/~irl/
 * All rights reserved.
 *
@@ -50,8 +50,6 @@ for i = 1:simu.N
     %CI
     pf_result(i).state{1} = zeros(3,1);
     pf_result(i).cov{1} = zeros(3,3);
-%     pf_result(i).state{1} = zeros(2,1);
-%     pf_result(i).cov{1} = zeros(2,2);
 
 end
 

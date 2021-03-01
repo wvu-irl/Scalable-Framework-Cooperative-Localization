@@ -1,18 +1,4 @@
-disp("init group...");
-
-% vertex = zeros(simu.N, 2);
-% for i = 1:simu.N
-%     vertex(i,1) = agent(i).tpx(1); 
-%     vertex(i,2) = agent(i).tpy(1);
-% end
-% 
-% D = pdist2(vertex, vertex); % get pairwise distance.
-% 
-% for i = 1:simu.N
-%     neighbors = find(D(i,:)<=simu.epsilon);
-% %     groups{i} = neighbors;
-%     groups{i} = [1 2 3 4];
-% end
+disp("Init grouping...");
 
 if simu.subN == 4
     for i = 1:simu.N

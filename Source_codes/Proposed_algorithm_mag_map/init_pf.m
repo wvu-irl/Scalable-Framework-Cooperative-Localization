@@ -2,7 +2,7 @@
 /*********************************************************************
 * Software License Agreement (BSD License)
 *
-* Copyright (c) <2018>, WVU Interactive Robotics Laboratory
+* Copyright (c) <2021>, WVU Interactive Robotics Laboratory
 *                       https://web.statler.wvu.edu/~irl/
 * All rights reserved.
 *
@@ -98,8 +98,6 @@ m_formulas.f(4,:) = m_formulas.pf(4) + m_formulas.gamma;
 
 m_formulas.fnf = matlabFunction(m_formulas.f);
 
-
-%build model for pf
 %build model for pf
 pf.nx = 4;	%state dimension (x,y,heading,gamma)
 pf.npf = simu.npf;	%number of particles in the particle filter
@@ -126,10 +124,6 @@ else
     simu.sigmaYawRate_temp = simu.sigmaYawRate *10;
 end
 
-if(simu.sigmaVelocity == 0.3 || simu.sigmaVelocity > 0.3)
-    simu.sigmaVelocity_temp = simu.sigmaVelocity * 10;
-else
-    simu.sigmaVelocity_temp = simu.sigmaVelocity * 10;
-end
+simu.sigmaVelocity_temp = simu.sigmaVelocity * 10;
 
 clear i

@@ -2,7 +2,7 @@
 /*********************************************************************
 * Software License Agreement (BSD License)
 *
-* Copyright (c) <2018>, WVU Interactive Robotics Laboratory
+* Copyright (c) <2021>, WVU Interactive Robotics Laboratory
 *                       https://web.statler.wvu.edu/~irl/
 * All rights reserved.
 *
@@ -53,63 +53,40 @@ clf
 subplot(311)
 plots.time = simu.Ts*1:length(errors.mn(1).px);
 for i=1:simu.N
-% for i=1:1
     plots.err_posx_dr(i)=plot(plots.time,errors.dr(i).px,'LineStyle',':','Color',plots.colors(i,:),'LineWidth',plots.linewidth); hold on; 
-%     plots.err_posx_cl(i)=plot(plots.time,errors.cl(i).px,'LineStyle','--','Color',plots.colors(i,:),'LineWidth',plots.linewidth); hold on;
     plots.err_posx_mn(i)=plot(plots.time,errors.mn(i).px,'LineStyle','-.','Color',plots.colors(i,:),'LineWidth',plots.linewidth); hold on; 
-%     plots.cov_posx_cl(i)=plot(plots.time,sqrt(cl(i).covx),'LineStyle','-','Color',plots.colors(i,:),'LineWidth',plots.linewidth); hold on; 
 end
 ylabel('Error (Meters)');
 xlabel('Time Step (Seconds)');
 grid on;
 title('X Position Error (Global Frame)');
 legend([plots.err_posx_dr(1),plots.err_posx_mn(1)],'DR','PF');
-% legend([plots.err_posx_dr(1),plots.err_posx_cl(1),plots.cov_posx_cl(1)],'DR','EKF','\sigma');
 
 subplot(312)
 plots.time = simu.Ts*1:length(errors.mn(1).py);
 for i=1:simu.N
 % for i=1:1
     plots.err_posy_dr(i)=plot(plots.time,errors.dr(i).py,'LineStyle',':','Color',plots.colors(i,:),'LineWidth',plots.linewidth); hold on; 
-%     plots.err_posy_cl(i)=plot(plots.time,errors.cl(i).py,'LineStyle','--','Color',plots.colors(i,:),'LineWidth',plots.linewidth); hold on;
     plots.err_posy_mn(i)=plot(plots.time,errors.mn(i).py,'LineStyle','-.','Color',plots.colors(i,:),'LineWidth',plots.linewidth); hold on; 
-%     plots.cov_posy_cl(i)=plot(plots.time,sqrt(cl(i).covy),'LineStyle','-','Color',plots.colors(i,:),'LineWidth',plots.linewidth); hold on; 
 end
 ylabel('Error (Meters)');
 xlabel('Time Step (Seconds)');
 grid on;
 title('Y Position Error (Global Frame)');
 legend([plots.err_posy_dr(1),plots.err_posy_mn(1)],'DR','PF');
-% legend([plots.err_posy_dr(1),plots.err_posy_cl(1),plots.cov_posy_cl(1)],'DR','EKF','\sigma');
+
 
 %% HEADING ERROR
 subplot(313)
 plots.time = simu.Ts*1:length(errors.mn(1).p);
 for i=1:simu.N
-% for i=1:1
     plots.err_heading_dr(i)=plot(plots.time,180/pi*errors.dr(i).theta,'LineStyle',':','Color',plots.colors(i,:),'LineWidth',plots.linewidth); hold on; 
-%     plots.err_heading_cl(i)=plot(plots.time,180/pi*errors.cl(i).theta,'LineStyle','--','Color',plots.colors(i,:),'LineWidth',plots.linewidth); hold on; 
     plots.err_heading_mn(i)=plot(plots.time,180/pi*errors.mn(i).theta,'LineStyle','-.','Color',plots.colors(i,:),'LineWidth',plots.linewidth); hold on; 
-    % plots.cov_heading_cl(i)=plot(plots.time,sqrt(cl(i).covtheta),'LineStyle','-','Color',plots.colors(i,:),'LineWidth',plots.linewidth); hold on;
-    % plots.cov_heading_cl(i)=plot(plots.time,-sqrt(cl(i).covtheta),'LineStyle','-','Color',plots.colors(i,:),'LineWidth',plots.linewidth); hold on; 
 end
 ylabel('Error (Degrees)');
 xlabel('Time Step (Seconds)');
 grid on;
 title('Heading Error (Global Frame)');
 legend([plots.err_heading_dr(1),plots.err_heading_mn(1)],'DR','PF');
-% legend([plots.err_heading_dr(1),plots.err_heading_cl(1),plots.cov_heading_cl(i)],'DR','EKF','\sigma');
 
-%% MAGNETIC RESIDUAL
-% figure;
-% plots.time = simu.Ts*1:length(mn(1).resid);
-% % for i=1:simu.N
-% for i=1:1
-%     plots.resid(i)=plot(plots.time,mn(i).resid,'LineStyle','-','Color',plots.colors(i,:),'LineWidth',plots.linewidth); hold on; 
-% end
-% ylabel('Resid (nT)');
-% xlabel('Time Step (Seconds)');
-% grid on;
-% title('Residual of Particle filter');
-% %% CLEAN UP
 clear markersize linewidth i

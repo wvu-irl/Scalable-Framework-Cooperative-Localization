@@ -2,7 +2,7 @@
 /*********************************************************************
 * Software License Agreement (BSD License)
 *
-* Copyright (c) <2018>, WVU Interactive Robotics Laboratory
+* Copyright (c) <2021>, WVU Interactive Robotics Laboratory
 *                       https://web.statler.wvu.edu/~irl/
 * All rights reserved.
 *
@@ -39,16 +39,6 @@
 %initial group offset, a constant distance R and random direction
 offset_y = simu.initoffset*sin(2*pi*rand); % group offset y
 offset_x = simu.initoffset*cos(2*pi*rand); % group offset x
-
-%initial position in y axis (maximum: 16 UAVs)
-for i=1:16
-	initialy_pool(i)=100+(i/16)*simu.initdistance;
-end
-
-randnum = randperm(length(initialy_pool));
-initialy_pool = initialy_pool(randnum);
-% initialy = initialy_pool(1:simu.N);
-
 
 %parallel trajectory (sin velocity)
 for idx=1:simu.N
@@ -96,10 +86,5 @@ while accumulatedTime < simulationTime
     i = i + 1;
     accumulatedTime = accumulatedTime + simu.Ts;
 end
-
-% for GD
-% simu.LearningRate = [agent(1).baseline*cos(agent(1).theta(1)+simu.sigmaYawRate*simu.Ts)*simu.Ts/1000.0; agent(1).baseline*sin(agent(1).theta(1)+simu.sigmaYawRate*simu.Ts)*simu.Ts/1000.0];
-% LearningRate_rest = repmat([simu.sigmaRange/(simu.N*1.25); simu.sigmaRange/(simu.N*1.25)],simu.N-1,1);
-% simu.LearningRate = [simu.LearningRate; LearningRate_rest];
 
 clear i accumulatedTime simulationTime idx idx1 offset_y offset_x

@@ -2,7 +2,7 @@
 /*********************************************************************
 * Software License Agreement (BSD License)
 *
-* Copyright (c) <2018>, WVU Interactive Robotics Laboratory
+* Copyright (c) <2021>, WVU Interactive Robotics Laboratory
 *                       https://web.statler.wvu.edu/~irl/
 * All rights reserved.
 *
@@ -53,6 +53,7 @@ if simu.i > simu.delayN %do nothing in the begin due to the delay
         magnetic_meas(i) = f(agent(formulas.map(i)).tpx((simu.i - simu.delayN)), agent(formulas.map(i)).tpy((simu.i - simu.delayN)));
         pf.meas = [pf.meas; magnetic_meas(i)];    %[y1;y2;y3;....]
     end
+    
     pf.meas = pf.meas + simu.sigmaMagnetic * randn(size(pf.meas));   %add magnetic measurement noise
     pf.yNow = pf.meas;  %magnetic measurement from magnetometer
 
@@ -89,12 +90,12 @@ if simu.i > simu.delayN %do nothing in the begin due to the delay
         pf.q(:,idx_group) = ones(pf.npf,1);
 
         for i=1:num_vehicle % calculate the likelihood by multiplying all UAVs' likelihood
-          pf.q(:,idx_group) = pf.q(:,idx_group) .* normpdf(pf.e(i,:),0,simu.sigmaMagnetic*10)';
+            pf.q(:,idx_group) = pf.q(:,idx_group) .* normpdf(pf.e(i,:),0,simu.sigmaMagnetic*10)';
         end
 
         % check divergence
         if(sum(pf.q(:,idx_group))<pf.divergence_threshold)
-          pf.q(:,idx_group) = zeros(pf.npf,1);
+            pf.q(:,idx_group) = zeros(pf.npf,1);
         end
 
         % calculate new weights
@@ -103,22 +104,17 @@ if simu.i > simu.delayN %do nothing in the begin due to the delay
         pf.w(:,idx_group) = pf.q(:,idx_group);    %copy particles' weights
 
         for i = 1:pf.nx
-          pf.xf(i,idx_group) = sum(pf.q(:,idx_group).*pf.x(i,:,idx_group)'); %average weighted
+            pf.xf(i,idx_group) = sum(pf.q(:,idx_group).*pf.x(i,:,idx_group)'); %average weighted
         end
 
         % if the number of effective particles below threshold, re sample
         pf.N_eff = 1/sum(pf.q(:,idx_group).^2);  %calculate effective particles
 
         if pf.N_eff<simu.threshold_resample
-            
-% %             test resample with CI
-%         pf.x(:,:,idx_group) = repmat(pf.state_temp(:,idx_group), 1, pf.npf) ...
-%        + sqrt(eye(pf.nx, pf.nx) .* pf.cov_temp(:,:,idx_group)) ...
-%        *  randn(pf.nx, pf.npf);
         
-          pf.index = resampleMSV(pf.q(:,idx_group));
-          pf.x(:,:,idx_group) = pf.x(:,pf.index,idx_group);
-          pf.w(:,idx_group) = ones(pf.npf,1);
+            pf.index = resampleMSV(pf.q(:,idx_group));
+            pf.x(:,:,idx_group) = pf.x(:,pf.index,idx_group);
+            pf.w(:,idx_group) = ones(pf.npf,1);
         end
         pf.cov_temp(:,:,idx_group) = fn_particle_cov(pf.w(:,idx_group), pf.x(:,:,idx_group), pf.xf(:,idx_group));
         pf.state_temp(:,idx_group) = pf.xf(:,idx_group);
@@ -126,10 +122,8 @@ if simu.i > simu.delayN %do nothing in the begin due to the delay
         pf_result(idx_group).state{1}(1,1) = pf.xf(1,idx_group);
         pf_result(idx_group).state{1}(2,1) = pf.xf(2,idx_group);
         pf_result(idx_group).state{1}(3,1) = pf.xf(3,idx_group);
-%         pf_result(idx_group).heading{1}(3,1) = pf.xf(3,idx_group);
         
         pf_result(idx_group).cov{1} = pf.cov_temp(1:3,1:3,idx_group);
-%         pf_result(idx_group).cov{1} = pf.cov_temp(1:2,1:2,idx_group);
         % project back each UAVs' position using relative position and leader's pose
         idx_center = find(group==idx_group); %index in subgroup.
         for i=1:num_vehicle
@@ -142,15 +136,8 @@ if simu.i > simu.delayN %do nothing in the begin due to the delay
                 ekf.pi(i*3-1)*cos(pf.xf(4,idx_group))+ekf.pi(i*3-2)*sin(pf.xf(4,idx_group))+pf.xf(2,idx_group);
             pf_result(formulas.map(i)).state{end}(3,1) = ...
                 pf.xf(3,idx_group)+ekf.pi(i*3);
-
-            % test: use truth relative pose;
-%             pf_result(formulas.map(i)).state{end+1}(1,1) = ...
-%                 agent(formulas.map(i)).tpx(simu.i)-agent(formulas.map(idx_center)).tpx(simu.i) + pf.xf(1,idx_group);
-%             pf_result(formulas.map(i)).state{end}(2,1) = ...
-%                 agent(formulas.map(i)).tpy(simu.i)-agent(formulas.map(idx_center)).tpy(simu.i) + pf.xf(2,idx_group);
             
             pf_result(formulas.map(i)).cov{end+1} = pf.cov_temp(1:3,1:3,idx_group);
-%             pf_result(formulas.map(i)).cov{end+1} = pf.cov_temp(1:2,1:2,idx_group);
         end
 
     else

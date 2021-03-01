@@ -2,7 +2,7 @@
 /*********************************************************************
 * Software License Agreement (BSD License)
 *
-* Copyright (c) <2018>, WVU Interactive Robotics Laboratory
+* Copyright (c) <2021>, WVU Interactive Robotics Laboratory
 *                       https://web.statler.wvu.edu/~irl/
 * All rights reserved.
 *
@@ -41,8 +41,8 @@ clear; close all; clc;
 
 %Monte Carlo Parameters
 %all parameters are introduced in detail in main.m 
-mc.N=8;    %number of UAVs
-mc.subN=16;  %subgroup size
+mc.N=16;    %number of UAVs
+mc.subN=8;  %subgroup size
 mc.fullCommunication=1;    %1: complete communication 0: pairwise communication
 
 mc.simulationTime=0.1*60;   %flight duration (second)
@@ -72,10 +72,6 @@ mc.magneticMap = 1;    %1: altitude 305 m; 2: 1205 m; 3: 2705 m; 4: 3005 m
 mc.npf = 10000; %number of particles in the particle filter
 mc.threshold_resample = 0.5*mc.npf;	%if the number of effective particles below threshold, do resample
 
-%For gradient descent
-mc.alpha = 0.8;	%RMSProp
-mc.iteration = 50; %number of iteration for doing gradient descent
-
 %For feedback control
 mc.kd = 0.0005; %gain for distance between UAV's position and target line
 mc.kh = 1;    %gain for angle between UAV's heading and target line's slope
@@ -103,8 +99,8 @@ mc.TotalIndex = length(mc.N_pool);
 for TotalIndex = 1:mc.TotalIndex    
     mc.N = mc.N_pool(TotalIndex); 
     mc.subN = mc.N / 2;
-    % mc.sigmaVelocity = mc.sigmaVelocity_pool(TotalIndex);
-     % mc.sigmaMagnetic = mc.sigmaMagnetic_pool(TotalIndex);
+%     mc.sigmaVelocity = mc.sigmaVelocity_pool(TotalIndex);
+%     mc.sigmaMagnetic = mc.sigmaMagnetic_pool(TotalIndex);
 %     mc.sigmaYawRate = mc.sigmaYawRate_pool(TotalIndex); 
     mc.biasVelocity=0.1*mc.sigmaVelocity; %standard deviation of velocity turn on bias (m/s)
 	mc.biasYawRate=0.1*mc.sigmaYawRate; %standard deviation of yaw rate turn on bias (rad/s)
@@ -116,8 +112,5 @@ for TotalIndex = 1:mc.TotalIndex
         data(iteration) = fn_cooperative_magnetic_localization(mc);       
     end
  	%edit mat file name when saving different data   
-    % save(['mc_data_sensitive_Velocity',num2str(mc.sigmaVelocity),'_withoutGD_Map1'], 'data','-v7.3');
-     % save(['mc_data_sensitive_sigmaMagnetic',num2str(mc.sigmaMagnetic),'_withoutGD_Map1'], 'data','-v7.3');
-%     save(['mc_data_sensitive_sigmaYawRate',num2str(mc.sigmaYawRate*180/pi),'_withoutGD_Map1'], 'data','-v7.3');
-    save(['mc_data_sensitive_num_of_UAV',num2str(mc.N),'_CI_subgroup',num2str(mc.subN),'_truth_1'], 'data','-v7.3');
+    save(['mc_data_sensitive_num_of_UAV',num2str(mc.N),'_CI_subgroup',num2str(mc.subN)], 'data','-v7.3');
 end

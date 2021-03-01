@@ -2,7 +2,7 @@
 /*********************************************************************
 * Software License Agreement (BSD License)
 *
-* Copyright (c) <2018>, WVU Interactive Robotics Laboratory
+* Copyright (c) <2021>, WVU Interactive Robotics Laboratory
 *                       https://web.statler.wvu.edu/~irl/
 * All rights reserved.
 *
@@ -132,16 +132,3 @@ end
 x = xp(1);
 y = xp(2);
 theta = xp(3);
-
-% figure()
-% plot(result.x,result.y); hold on;
-% % plot(1:length(result.x), -L(3)*ones(1,length(result.x)),'LineWidth',5); hold on;
-% grid on;
-
-% figure()
-% plot(1:length(result.theta),result.theta.*180./pi); hold on;
-% grid on;
-
-% figure()
-% plot(1:length(result.x), -L(3)*ones(1,length(result.x))); hold on;
-% grid on

@@ -2,7 +2,7 @@
 /*********************************************************************
 * Software License Agreement (BSD License)
 *
-* Copyright (c) <2018>, WVU Interactive Robotics Laboratory
+* Copyright (c) <2021>, WVU Interactive Robotics Laboratory
 *                       https://web.statler.wvu.edu/~irl/
 * All rights reserved.
 *
@@ -123,34 +123,15 @@ if simu.i > simu.delayN	%do nothing in the begin due to the delay
   for i=1:num_vehicle
 % 
     	%truth relative
-	    for j=1:num_vehicle
-	        ekf.pi((j*3-2):(j*3)) = [agent(group(j)).tpx(simu.i - simu.delayN)-agent(idx_group).tpx(simu.i - simu.delayN) ...
-	            agent(group(j)).tpy(simu.i - simu.delayN)-agent(idx_group).tpy(simu.i - simu.delayN) ...
-	            agent(group(j)).ttheta(simu.i - simu.delayN)-agent(idx_group).ttheta(simu.i - simu.delayN)];
-	    end
-% 
-% 	    % for i=1:num_vehicle
-% 	    %     ekf.pi2((i*3-2):(i*3)) = [agent(i).tpx(simu.i - simu.delayN)-agent(2).tpx(simu.i - simu.delayN) ...
-% 	    %         agent(i).tpy(simu.i - simu.delayN)-agent(2).tpy(simu.i - simu.delayN) ...
-% 	    %         agent(i).ttheta(simu.i - simu.delayN)-agent(2).ttheta(simu.i - simu.delayN)];
-% 	    % end
-% 
-% 	    %ekf relative
-%     	%to UAV1
-%         ekf.pi((i*3-2):(i*3)) = ekf.x((i*3-2):(i*3),:,idx_group)-ekf.x(1:3,:,idx_group);
-% 
-%         %to UAV2
-%         ekf.pi2((i*3-2):(i*3)) = ekf.x((i*3-2):(i*3))-ekf.x(4:6);
-% 
-%         %Cooperative Range Localization Pose (Relative Frame)
-%     	cl(i).rx(simu.i-simu.delayN) = ekf.pi(i*3-2);	%for UAV1
-%     	cl(i).ry(simu.i-simu.delayN) = ekf.pi(i*3-1);
-%     	%distance between each pair of UAVs is for constrains in gradian descent
-%     	cl(i).distance1(simu.i-simu.delayN) = sqrt(cl(i).rx(simu.i-simu.delayN)^2 + cl(i).ry(simu.i-simu.delayN)^2);
-% 
-%     	cl(i).rx2(simu.i-simu.delayN) = ekf.pi2(i*3-2);	%for UAV2
-%     	cl(i).ry2(simu.i-simu.delayN) = ekf.pi2(i*3-1);
-%     	cl(i).distance2(simu.i-simu.delayN) = sqrt(cl(i).rx2(simu.i-simu.delayN)^2 + cl(i).ry2(simu.i-simu.delayN)^2);
+% 	    for j=1:num_vehicle
+% 	        ekf.pi((j*3-2):(j*3)) = [agent(group(j)).tpx(simu.i - simu.delayN)-agent(idx_group).tpx(simu.i - simu.delayN) ...
+% 	            agent(group(j)).tpy(simu.i - simu.delayN)-agent(idx_group).tpy(simu.i - simu.delayN) ...
+% 	            agent(group(j)).ttheta(simu.i - simu.delayN)-agent(idx_group).ttheta(simu.i - simu.delayN)];
+% 	    end
+
+	    %ekf relative
+    	%to UAV1
+        ekf.pi((i*3-2):(i*3)) = ekf.x((i*3-2):(i*3),:,idx_group)-ekf.x(1:3,:,idx_group);
    end
 end
 

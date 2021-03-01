@@ -2,7 +2,7 @@
 /*********************************************************************
 * Software License Agreement (BSD License)
 *
-* Copyright (c) <2018>, WVU Interactive Robotics Laboratory
+* Copyright (c) <2021>, WVU Interactive Robotics Laboratory
 *                       https://web.statler.wvu.edu/~irl/
 * All rights reserved.
 *
@@ -35,17 +35,12 @@
 *********************************************************************/
 %}
 %%
-%propagate pose in global reference frame
-for idx=1:simu.N 
-    [x,y,theta] = fn_propagate_global_pose(agent(idx).px(simu.i-1),...
-                                        agent(idx).py(simu.i-1),...
-                                        agent(idx).theta(simu.i-1),...
-                                        agent(idx).vel(simu.i),...
-                                        agent(idx).dtheta(simu.i),...
-                                        simu.Ts);
-    agent(idx).px(simu.i)=x;
-    agent(idx).py(simu.i)=y;
-    agent(idx).theta(simu.i)=theta;
+
+% function [distance] = fn_dist(x1,y1,x2,y2)
+% Return the euclidean distance between to (x1,y1) and (x2,y2)
+function [distance] = fn_dist(x1,y1,x2,y2)
+	diffx = x2-x1;
+	diffy = y2-y1;
+	distance = sqrt(diffx^2 + diffy^2);
 end
 
-clear idx x y theta

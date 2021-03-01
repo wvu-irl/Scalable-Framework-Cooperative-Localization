@@ -2,7 +2,7 @@
 /*********************************************************************
 * Software License Agreement (BSD License)
 *
-* Copyright (c) <2018>, WVU Interactive Robotics Laboratory
+* Copyright (c) <2021>, WVU Interactive Robotics Laboratory
 *                       https://web.statler.wvu.edu/~irl/
 * All rights reserved.
 *
@@ -35,12 +35,17 @@
 *********************************************************************/
 %}
 %%
+%function [x,y,theta] = fn_propagate_global_pose(x,y,theta,vel,dtheta,dt)
+%to estimate dynamic movement based on velocity and yaw rate
+%output [x,y,theta]: pose at timestep k+1
+%input (x,y,theta): pose at timestep k
+%		vel: velocity
+%		dtheta: yaw rate
+%		dt: sampling time
 
-% function [distance] = fn_dist(x1,y1,x2,y2)
-% Return the euclidean distance between to (x1,y1) and (x2,y2)
-function [distance] = fn_dist(x1,y1,x2,y2)
-	diffx = x2-x1;
-	diffy = y2-y1;
-	distance = sqrt(diffx^2 + diffy^2);
+function [x,y,theta] = fn_propagate_global_pose(x,y,theta,vel,dtheta,dt)
+	x = x + dt*vel*cos(theta);
+	y = y + dt*vel*sin(theta);
+	theta = theta + dt*dtheta;
 end
 

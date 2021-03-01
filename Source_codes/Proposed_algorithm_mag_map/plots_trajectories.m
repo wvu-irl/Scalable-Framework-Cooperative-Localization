@@ -2,7 +2,7 @@
 /*********************************************************************
 * Software License Agreement (BSD License)
 *
-* Copyright (c) <2018>, WVU Interactive Robotics Laboratory
+* Copyright (c) <2021>, WVU Interactive Robotics Laboratory
 *                       https://web.statler.wvu.edu/~irl/
 * All rights reserved.
 *
@@ -61,7 +61,6 @@ for i=1:simu.N
 % for i=1:1
     plots.pos_t(i)=plot([agent(i).tpx(1:end)],[agent(i).tpy(1:end)],'LineStyle','-','Color',plots.colors(i,:),'LineWidth',plots.linewidth); hold on; 
     plots.pos_dr(i)=plot([agent(i).px(1:end)],[agent(i).py(1:end)],'LineStyle',':','Color',plots.colors(i,:),'LineWidth',plots.linewidth); hold on; 
-%     plots.pos_cl(i)=plot([cl(i).px(1:end)],[cl(i).py(1:end)],'LineStyle','--','Color',plots.colors(i,:),'LineWidth',plots.linewidth); hold on; 
     plots.pos_mn(i)=plot([mn(i).px(1:end)],[mn(i).py(1:end)],'LineStyle','-.','Color',plots.colors(i,:),'LineWidth',plots.linewidth); hold on;
 end
 xlabel('X (meters)');
@@ -79,7 +78,6 @@ plots.time = simu.Ts*1:length(mn(1).theta);
 for i=1:1
     plots.heading_t(i)=plot(plots.time(1:end),[180/pi*agent(i).ttheta(1:length(plots.time))],'LineStyle','-','Color',plots.colors(i,:),'LineWidth',plots.linewidth); hold on; 
     plots.heading_dr(i)=plot(plots.time(1:end),[180/pi*agent(i).theta(1:length(plots.time))],'LineStyle',':','Color',plots.colors(i,:),'LineWidth',plots.linewidth);
-%     plots.heading_cl(i)=plot(plots.time(1:end),[180/pi*cl(i).theta(1:length(plots.time))],'LineStyle','--','Color',plots.colors(i,:),'LineWidth',plots.linewidth);
     plots.heading_mn(i)=plot(plots.time(1:end),[180/pi*mn(i).theta(1:length(plots.time))],'LineStyle','-.','Color',plots.colors(i,:),'LineWidth',plots.linewidth);
 end
 xlabel('Time (Seconds)');
@@ -87,18 +85,6 @@ ylabel('Heading (Degrees)');
 grid on;
 title('Heading (Global Frame)');
 legend([plots.heading_t(1),plots.heading_dr(1),plots.heading_mn(1)],'Truth','DR','PF');
-% legend([plots.heading_t(1),plots.heading_dr(1),plots.heading_cl(1)],'Truth','DR','EKF');
-
-%% GLOBAL VELOCITY
-% figure;
-% plots.time = simu.Ts*1:length(cl(1).theta);
-% for i=1:simu.N
-%     plots.vel(i)=plot(plots.time(1:end),[agent(i).tvel(1:length(plots.time))],'LineStyle','-','Color',plots.colors(i,:),'LineWidth',plots.linewidth); hold on; 
-% end
-% xlabel('Time (Seconds)');
-% ylabel('Velocity (meters/second^2)');
-% grid on;
-% title('Velocity (Global Frame)');
 
 %% CLEAN UP
 clear markersize linewidth i

@@ -34,8 +34,8 @@ while j < M
     while cnt <= Ns(j)
         indx(i) = j;
         i = i + 1; cnt = cnt + 1;
-    end;
-end;
+    end
+end
 indx(N+1:end) =[];
 
 
