@@ -4,6 +4,17 @@ This repository contains the official Matlab implementation for our paper submit
 
 <img align="center" src="https://github.com/wvu-irl/Scalable-Framework-Cooperative-Localization/blob/main/docs/overall_approach.png">
 
+<center>
+    <img style="border-radius: 0.3125em;
+    box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),0 2px 10px 0 rgba(34,36,38,.08);"
+    src="https://github.com/wvu-irl/Scalable-Framework-Cooperative-Localization/blob/main/docs/overall_approach.png">
+    <br>
+    <div style="color:orange; border-bottom: 1px solid #d9d9d9;
+    display: inline-block;
+    color: #999;
+    padding: 2px;">Illustration of the proposed framework for map matching based cooperative localization. (Left) A large group of agents is divided in subgroups based on communication constraints where one subgroup is created for each agent. (Upper Right) The geometry of the subgroups (i.e., the relative positions) are estimated using range-only measurements, then the geometry is used to extract measurements of the scalar field to estimate the pose and associated uncertainty. (Lower Right) An agent receives multiple copies of its pose estimate through its membership in several subgroups and fuses them to reduce pose error.</div>
+</center>
+
 ## Overview
 - [News](#news)
 - [Introduction](#dependencies)
@@ -18,6 +29,20 @@ Localization based on map matching (e.g., using gravity anomaly, magnetic anomal
 
 ## Implementation
 
+### Pre-requirements
+This code was tested with MATLAB 2020b. The following toolboxs are required with the code:
+-Parallel Computing Toolbox
+-Control System Toolbox
 
-## Acknoledgement
+### Plot maps
+#### Bathymetric map
+-download map data at: Google Drive(https://drive.google.com/file/d/14npOMaTV6z6uZIB4Uet7j0KISWl9a9CN/view?usp=sharing)
+-copy the chancen_bath.asc file to the folder bathymetric_map/
+-run plot_bathymetric_map.m under folder bathymetric_map/
+
+#### Magnetic anomaly map
+-run plot_magnetic_map.m under folder magnetic_maps/
+
+## Acknowledgement
+Thanks for the scalar field map data provided by U.S. Geological Survey.
 
