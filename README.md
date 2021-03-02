@@ -37,11 +37,11 @@ This code was tested with MATLAB 2020b. The following toolboxs are required with
 - set parameters in monte_carlo_parallel.m under folder Proposed_algorithm_mag_map/
 - run monte_carlo_parallel.m under folder Proposed_algorithm_mag_map/
 
-#### Perform the full connection case
-- set parameters in main.m under folder Full_connection_mag_map/
-- run main.m under folder Full_connection__mag_map/
-- set parameters in monte_carlo_parallel.m under folder Full_connection_mag_map/
-- run monte_carlo_parallel.m under folder Full_connection_mag_map/
+#### Perform the full communication case
+- set parameters in main.m under folder Full_communication_mag_map/
+- run main.m under folder Full_communication_mag_map/
+- set parameters in monte_carlo_parallel.m under folder Full_communication_mag_map/
+- run monte_carlo_parallel.m under folder Full_communication_mag_map/
 
 
 ### Simulation with Bathymetric map
@@ -51,11 +51,19 @@ This code was tested with MATLAB 2020b. The following toolboxs are required with
 - run plot_bathymetric_map.m under folder bathymetric_map/
 
 #### Perform the proposed algorithm (Once)
+- set parameters in main.m under folder Proposed_algorithm_bathy_map
+- run main.m under folder Proposed_algorithm_mag_map/
 
 #### Perform the proposed algorithm (Monte Carlo Simulations)
+- set parameters in monte_carlo_parallel.m under folder Proposed_algorithm_bathy_map/
+- run monte_carlo_parallel.m under folder Proposed_algorithm_bathy_map/
 
-#### Perform the full connection case
+#### Perform the full communication case
 
+- set parameters in main.m under folder Full_coomunication_bathy_map/
+- run main.m under folder Full_communication_bathy_map/
+- set parameters in monte_carlo_parallel.m under folder Full_communication_bathy_map/
+- run monte_carlo_parallel.m under folder Full_communication_bathy_map/
 
 ## Acknowledgement
 Thanks for the scalar field map data provided by [U.S. Geological Survey](https://www.usgs.gov/).

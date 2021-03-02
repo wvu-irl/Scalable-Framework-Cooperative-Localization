@@ -1,9 +1,0 @@
-The Matlab codes perform algorithms presented on paper "Cooperative UAV Navigation using Inter-Vehicle Ranging and Magnetic Anomaly Measurements" (2018a Matlab)
-
-Yang, Chizhao, Jared Strader, Yu Gu, Alexander Hypes, Aaron Canciani, and Kevin Brink. "Cooperative UAV Navigation using Inter-Vehicle Ranging and Magnetic Anomaly Measurements." In 2018 AIAA Guidance, Navigation, and Control Conference, p. 1595. 2018.
-
-main.m is for single time simulation
- 
-monte_carlo_parallel.m is for 100 times Monte Carlo simulation
-
-Magnetic_map.mat is the simulated magnetic anomaly map
